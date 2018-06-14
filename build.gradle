@@ -1,0 +1,62 @@
+/*
+ * Copyright (C) 2018 Raul Hernandez Lopez
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+buildscript {
+    ext.kotlin_version = '1.2.50'
+    ext.arrow_version = '0.7.2'
+    ext.supportLibrary = '27.0.2'
+    ext.coroutinesVersion = '0.16'
+    ext.build_tools_version = '27.0.3'
+    ext.constraint_version = '1.1.2'
+    ext.picasso_version = '2.5.2'
+
+    ext.test_runner_version = '1.0.2'
+    ext.test_junit_version = '4.12'
+
+    ext.appId = "com.raulh82vlc.functionalkotlinarrow"
+    ext.minSdk = 21
+    ext.compileVersion = 27
+    ext.targetSdk = 27
+    ext.version_code = 1
+    ext.version_name = "1.0"
+    ext.testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+
+    repositories {
+        maven { url "http://dl.bintray.com/kategory/maven" }
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha18'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "http://dl.bintray.com/kategory/maven" }
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://kotlin.bintray.com/kotlinx' }
+        maven { url "http://dl.bintray.com/kotlin/kotlin-dev" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -8,6 +8,9 @@
 # Intellij
 **.iml
 
+#Detekt reports
+app/reports/*
+
 # Gradle files
 .gradle/
 build/
@@ -24,7 +27,9 @@ local.properties
 
 ### Intellij ###
 /.idea
+.idea/*
 idea/*
+idea/
 
 # Caching
 4.6/*

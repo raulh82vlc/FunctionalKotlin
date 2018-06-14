@@ -1,0 +1,101 @@
+/*
+ * Copyright (C) 2018 Raul Hernandez Lopez
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0.M11"
+    }
+}
+
+apply plugin: 'kotlin-kapt'
+apply from: rootProject.file('gradle/generated-kotlin-sources.gradle')
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+android {
+    compileSdkVersion compileVersion
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        applicationId appId
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode version_code
+        versionName version_name
+        testInstrumentationRunner testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    detekt {
+        version = "1.0.0.M11"
+        input = "$project.projectDir.absolutePath"
+        config = "$project.rootDir/detekt.yml"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+        output = "$project.projectDir.absolutePath/reports/"
+        report = "$project.projectDir.absolutePath/reports/"
+    }
+}
+
+dependencies {
+    implementation "com.android.support:appcompat-v7:$supportLibrary"
+    implementation "com.android.support:design:$supportLibrary"
+    implementation "com.android.support:cardview-v7:$supportLibrary"
+    implementation "com.android.support:recyclerview-v7:$supportLibrary"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
+
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    kapt "io.arrow-kt:arrow-annotations-processor:$arrow_version"
+    implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-typeclasses:$arrow_version"
+    implementation "io.arrow-kt:arrow-instances-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-instances-data:$arrow_version"
+    implementation "io.arrow-kt:arrow-effects:$arrow_version"
+    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
+    implementation "io.arrow-kt:arrow-mtl:$arrow_version"
+
+    testImplementation "junit:junit:$test_junit_version"
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+}
