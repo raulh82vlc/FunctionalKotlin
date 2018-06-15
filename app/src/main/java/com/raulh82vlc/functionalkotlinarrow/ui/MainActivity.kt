@@ -70,6 +70,6 @@ class MainActivity : AppCompatActivity(), FeedListView {
 
     private fun showResults() {
         no_results_view.visibility = View.GONE
-        no_results_view.visibility = View.VISIBLE
+        feed_rv.visibility = View.VISIBLE
     }
 }
