@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/raulh82vlc/FunctionalKotlin.svg?branch=master)](https://travis-ci.org/raulh82vlc/FunctionalKotlin)
 [![Kotlin version badge](https://img.shields.io/badge/kotlin-1.2.50-blue.svg)](http://kotlinlang.org/)
 
-It's a sample app used to learn Functional programming
+It's a sample app used to learn Functional programming with *Kotlin*.
 
 Kotlin has many nice features as a modern language, and to enhance all its power,
 Arrow is the perfect companion: "Λrrow is a library for Typed Functional Programming in Kotlin"
@@ -10,16 +10,16 @@ Arrow is the perfect companion: "Λrrow is a library for Typed Functional Progra
 <img height="100" src="https://avatars2.githubusercontent.com/u/29458023?v=4&amp;s=200" width="100">
 
 ### Brief overview
-This side project is the transformation of the previous:
-[FlickrFeed with RxJava 2 & DI](https://github.com/raulh82vlc/FlickrFeed)
-However, DI is not used on this side project, nor RxJava 2 on behalf of Kotlin coroutines
+This side project is the transformation of the previous written in *Java* side project: [FlickrFeed with RxJava 2 & DI](https://github.com/raulh82vlc/FlickrFeed).
+
+However, it is **100% Kotlin** without any DI on this side project, I believe is not necessary at all for such a simple project, nor RxJava 2 on behalf of Kotlin coroutines for asynchronous tasks.
 
 ### SDK support
 Support SDKs from **21** to **27**
 
 # Disclosure - Libraries used
 - [Arrow library](https://github.com/arrow-kt/arrow) for Functional programming
-- Kotlin Coroutines for asynchronous tasks
+- **Kotlin** Coroutines for asynchronous tasks
 - Retrofit 2 with OkHttp for network requests
 - Picasso for image rendering and cache
 - Gson for easy JSON parsing
