@@ -30,6 +30,9 @@ local.properties
 .idea/*
 idea/*
 idea/
+/.idea/misc.xml
+misc.xml
+
 
 # Caching
 4.6/*
