@@ -6,6 +6,11 @@ Arrow is the perfect companion: "Λrrow is a library for Typed Functional Progra
 
 <img height="100" src="https://avatars2.githubusercontent.com/u/29458023?v=4&amp;s=200" width="100">
 
+### Brief description
+This side project is the transformation of the previous:
+[FlickrFeed with RxJava 2 & DI](https://github.com/raulh82vlc/FlickrFeed)
+However, DI is not used on this side project, nor RxJava 2 on behalf of Kotlin coroutines
+
 ### SDK support
 Support SDKs from **21** to **27**
 
