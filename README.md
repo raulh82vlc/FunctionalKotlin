@@ -1,4 +1,7 @@
 # Functional Kotlin
+[![Build Status](https://travis-ci.org/raulh82vlc/FunctionalKotlin.svg?branch=master)](https://travis-ci.org/raulh82vlc/FunctionalKotlin)
+[![Kotlin version badge](https://img.shields.io/badge/kotlin-1.2.50-blue.svg)](http://kotlinlang.org/)
+
 It's a sample app used to learn Functional programming
 
 Kotlin has many nice features as a modern language, and to enhance all its power,
