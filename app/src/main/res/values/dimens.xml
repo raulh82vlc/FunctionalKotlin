@@ -1,0 +1,17 @@
+<resources>
+    <dimen name="vertical_margin">10dp</dimen>
+    <dimen name="text_size">12sp</dimen>
+    <dimen name="text_title_size">16sp</dimen>
+    <dimen name="elevation">6dp</dimen>
+    <dimen name="margin_medium">10dp</dimen>
+    <dimen name="margin_medium_large">20dp</dimen>
+    <dimen name="margin_small_medium">8dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_line">1dp</dimen>
+    <dimen name="margin_large">60dp</dimen>
+    <dimen name="height_large">40dp</dimen>
+    <dimen name="margin_start_collapse_toolbar">48dp</dimen>
+    <dimen name="margin_end_collapse_toolbar">64dp</dimen>
+    <dimen name="height_image">100dp</dimen>
+    <dimen name="height_large_image">600dp</dimen>
+</resources>

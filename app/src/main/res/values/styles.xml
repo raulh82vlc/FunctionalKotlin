@@ -1,11 +1,37 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorTranslucent</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Title" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_title_size</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:singleLine">false</item>
+    </style>
+
+    <style name="Details" parent="Title">
+        <item name="android:textSize">@dimen/text_title_size</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+    </style>
+
+    <style name="Attributes" parent="Title">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+    </style>
+
+    <style name="NoResults" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_title_size</item>
+        <item name="android:textColor">@color/blue_bright</item>
+        <item name="android:text">@string/list_empty</item>
+        <item name="android:background">@android:color/white</item>
     </style>
 
 </resources>

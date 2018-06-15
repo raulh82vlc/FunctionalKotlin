@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FunctionalKotlinArrow</string>
+    <string name="app_name">Flickr Feed Functional</string>
+    <string name="action_search">Search</string>
+    <string name="loading_feed">Loading feed…</string>
+    <string name="feed_loader">Updating</string>
+    <string name="list_empty">There are no results for feed</string>
+    <string name="feed_item_not_known">This item is unavailable, try later</string>
 </resources>
