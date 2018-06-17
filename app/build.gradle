@@ -63,6 +63,10 @@ android {
         abortOnError false
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     detekt {
         version = "1.0.0.M11"
         input = "$project.projectDir.absolutePath"

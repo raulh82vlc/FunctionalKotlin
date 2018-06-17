@@ -14,31 +14,22 @@
  * limitations under the License.
  */
 
-package com.raulh82vlc.functionalkotlinarrow;
+package com.raulh82vlc.functionalkotlinarrow
 
-import android.app.Application;
+import android.app.Application
+import timber.log.Timber
 
+class FunctionalKotlinApp : Application() {
 
-import timber.log.Timber;
-
-/**
- * Extension of the application component
- *
- * @author Raul Hernandez Lopez
- */
-public class FunctionalKotlinApp extends Application {
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        initTimberDebugOnly();
+    override fun onCreate() {
+        super.onCreate()
+        initTimberDebugOnly()
     }
 
-    private void initTimberDebugOnly() {
+    private fun initTimberDebugOnly() {
         if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-            Timber.tag("KotlinFunctional");
-            Timber.d("KotlinFunctional -> onCreate");
+            Timber.plant(Timber.DebugTree())
+            Timber.tag("KotlinFunctional").d("onCreate")
         }
     }
 }

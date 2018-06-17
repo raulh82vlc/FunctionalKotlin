@@ -19,6 +19,10 @@ package com.raulh82vlc.functionalkotlinarrow.data
 import arrow.effects.IO
 import com.raulh82vlc.functionalkotlinarrow.data.cache.model.FeedItemCacheModel
 import com.raulh82vlc.functionalkotlinarrow.data.network.NetworkDataSource
+
+/**
+ * Feed Repository where data sources are managed
+ */
 object FeedRepository {
 
     fun getFeed(format: String): IO<List<FeedItemCacheModel>> =

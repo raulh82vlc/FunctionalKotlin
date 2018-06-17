@@ -22,7 +22,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.raulh82vlc.functionalkotlinarrow.R
 import com.raulh82vlc.functionalkotlinarrow.data.cache.model.FeedItemCacheModel
+import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_list.view.*
+import com.squareup.picasso.Picasso.with as withPicasso
 
 class FeedAdapter(
         var feedList: List<FeedItemCacheModel> = ArrayList(),
@@ -44,15 +46,14 @@ class FeedAdapter(
         notifyDataSetChanged()
     }
 
-    class FeedViewHolder(view: View,
-                     val itemClick: (FeedItemCacheModel) -> Unit) : RecyclerView.ViewHolder(
-            view) {
+    class FeedViewHolder(override val containerView: View?,
+                         private val itemClick: (FeedItemCacheModel) -> Unit)
+                         : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(itemFeed: FeedItemCacheModel) {
             with(itemFeed) {
-                com.squareup.picasso.Picasso.with(itemView.context)
-                        .load(itemFeed.media.url).into(itemView.iv_image)
-                itemView.txt_title.text = itemFeed.title
+                withPicasso(itemView.context).load(media.url).into(itemView.iv_image)
+                itemView.txt_title.text = title
                 itemView.setOnClickListener { itemClick(this) }
             }
         }

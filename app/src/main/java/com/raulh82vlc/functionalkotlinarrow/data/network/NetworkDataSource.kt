@@ -40,28 +40,30 @@ import retrofit2.Retrofit
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
+/**
+ * Data source responsible of network requests
+ */
 object NetworkDataSource {
 
     private const val JSON_FLICKR_FEED_LITERAL = "jsonFlickrFeed("
     private const val JSON_FLICKR_FEED_KEYWORD = "jsonFlickrFeed\\("
     private const val API_HOST = "https://api.flickr.com/services/"
 
-    val gson = Gson()
+    private val gson = Gson()
 
-    val retrofit = Retrofit.Builder()
+    private val retrofit = Retrofit.Builder()
             .baseUrl(API_HOST)
             .client(createOkHttp())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
             .create(FeedApi::class.java)
 
-    private fun createOkHttp(): OkHttpClient {
-        val okHttpClient = OkHttpClient.Builder()
+    private fun createOkHttp(): OkHttpClient =
+            OkHttpClient.Builder()
                 .connectTimeout(3, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
-        return okHttpClient.build()
-    }
+                .build()
 
     fun requestFeed(format: String): IO<List<FeedItemCacheModel>> {
         val monadError = IO.monadError()
