@@ -17,8 +17,7 @@
 package com.raulh82vlc.functionalkotlinarrow.data.network
 
 import arrow.Kind
-import arrow.core.Try
-import arrow.core.right
+import arrow.core.*
 import arrow.effects.IO
 import arrow.effects.async
 import arrow.effects.fix
@@ -27,8 +26,8 @@ import arrow.effects.typeclasses.Async
 import arrow.typeclasses.binding
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
-import com.raulh82vlc.functionalkotlinarrow.data.NetworkToCacheMapper
 import com.raulh82vlc.functionalkotlinarrow.data.cache.model.FeedItemCacheModel
+import com.raulh82vlc.functionalkotlinarrow.data.map
 import com.raulh82vlc.functionalkotlinarrow.data.network.error.ApiException
 import com.raulh82vlc.functionalkotlinarrow.data.network.model.FeedApiModel
 import kotlinx.coroutines.experimental.CommonPool
@@ -39,6 +38,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.experimental.async as asyncCoroutines
 
 /**
  * Data source responsible of network requests
@@ -78,28 +78,23 @@ object NetworkDataSource {
         }.fix()
     }
 
-    private fun transformToRepository(feed: Call<ResponseBody>): List<FeedItemCacheModel> {
-        val response = execute(feed)?.string()
-        response?.run {
-            if (hasFeedFormat(this)) {
-                return NetworkToCacheMapper.map(deserializeFeedJSON(extractJSONFromResponse(this)).feedItems)
-            }
-            return emptyList()
-        }
-        return emptyList()
-    }
+    private fun transformToRepository(feed: Call<ResponseBody>) =
+            execute(feed).toOption()
+                .map { it.string() }
+                .filter { hasFeedFormat(it) }
+                .map { map(deserializeFeedJSON(extractJSONFromResponse(it)).feedItems) }
+                .getOrElse { emptyList() }
 
     private fun hasFeedFormat(responseBodyResult: String): Boolean =
         responseBodyResult.contains(JSON_FLICKR_FEED_LITERAL)
 
-    private fun extractJSONFromResponse(response: String): String {
+    private fun extractJSONFromResponse(response: String) : String {
         val responseOutput = response.replaceFirst(JSON_FLICKR_FEED_KEYWORD.toRegex(), "")
         return responseOutput.substring(0, responseOutput.length - 1)
     }
 
-    private fun deserializeFeedJSON(responseJson: String): FeedApiModel {
-        return gson.fromJson(responseJson, FeedApiModel::class.java)
-    }
+    private fun deserializeFeedJSON(responseJson: String) =
+            gson.fromJson(responseJson, FeedApiModel::class.java)
 
     /**
      * Run in Async context a Coroutine
@@ -111,7 +106,7 @@ object NetworkDataSource {
             onError: (Throwable) -> B,
             onSuccess: (A) -> B, AC: Async<F>): Kind<F, B> {
         return AC.async { proc ->
-            kotlinx.coroutines.experimental.async(CommonPool) {
+            asyncCoroutines(CommonPool) {
                 val result = Try { f() }.fold(onError, onSuccess)
                 proc(result.right())
             }

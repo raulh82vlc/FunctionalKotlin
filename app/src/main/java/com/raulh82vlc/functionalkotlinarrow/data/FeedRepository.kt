@@ -28,4 +28,3 @@ object FeedRepository {
     fun getFeed(format: String): IO<List<FeedItemCacheModel>> =
         NetworkDataSource.requestFeed(format)
 }
-

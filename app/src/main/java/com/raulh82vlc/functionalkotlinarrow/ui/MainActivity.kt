@@ -35,12 +35,12 @@ class MainActivity : AppCompatActivity(), FeedListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setFeedList()
+        initFeedList()
 
         Presentation.showFeed(this).fix().unsafeRunAsync {}
     }
 
-    private fun setFeedList() {
+    private fun initFeedList() {
         feed_rv.setHasFixedSize(true)
         feed_rv.layoutManager = LinearLayoutManager(this)
         feedAdapter = FeedAdapter(itemClick = {

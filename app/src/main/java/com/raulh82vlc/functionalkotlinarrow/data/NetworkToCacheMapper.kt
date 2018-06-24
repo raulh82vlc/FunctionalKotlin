@@ -20,8 +20,6 @@ import com.raulh82vlc.functionalkotlinarrow.data.cache.model.FeedItemCacheModel
 import com.raulh82vlc.functionalkotlinarrow.data.network.model.FeedItemApiModel
 import java.util.*
 
-object NetworkToCacheMapper {
-
     private const val REGEX_WHITESPACE = "\\s+"
 
     fun map(apiInput: List<FeedItemApiModel>): List<FeedItemCacheModel> {
@@ -43,11 +41,10 @@ object NetworkToCacheMapper {
         return cacheOutput
     }
 
-    fun mapTags(tags: String): List<String> {
+    private fun mapTags(tags: String): List<String> {
         val strings = tags.split(REGEX_WHITESPACE.toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
         // this avoids empty space passed as a value
         return if (strings.size == 1 && strings[0].isEmpty()) {
             ArrayList()
         } else Arrays.asList(*strings)
     }
-}
