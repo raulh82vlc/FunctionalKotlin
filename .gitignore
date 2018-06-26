@@ -30,6 +30,7 @@ local.properties
 .idea/*
 idea/*
 idea/
+.idea/misc.xml
 /.idea/misc.xml
 misc.xml
 
